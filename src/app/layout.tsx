@@ -1,18 +1,29 @@
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
+import "./globals.css"
+import {ThemeProvider} from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: 'Next.js on GitHub Pages',
-  description: 'Deploy your static Next.js site to GitHub Pages.',
+    title: 'Next.js on GitHub Pages',
+    description: 'Deploy your static Next.js site to GitHub Pages.',
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning={true}>
+        <body>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme={"system"}
+            enableSystem={true}
+            disableTransitionOnChange
+        >
+            {children}
+        </ThemeProvider>
+        </body>
+        </html>
+    );
 }
